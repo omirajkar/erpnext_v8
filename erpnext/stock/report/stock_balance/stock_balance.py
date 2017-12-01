@@ -142,7 +142,6 @@ def get_item_warehouse_map(filters):
 			qty_diff = flt(d.qty_after_transaction) - qty_dict.bal_qty
 		else:
 			qty_diff = flt(d.actual_qty)
-
 		value_diff = flt(d.stock_value_difference)
 
 		if d.posting_date < from_date:
@@ -159,7 +158,7 @@ def get_item_warehouse_map(filters):
 
 		qty_dict.val_rate = d.valuation_rate
 		qty_dict.bal_qty += qty_diff
-		qty_dict.bal_val += value_diff
+		qty_dict.bal_val = qty_dict.val_rate * qty_dict.bal_qty
 		
 	iwb_map = filter_items_with_no_transactions(iwb_map)
 
